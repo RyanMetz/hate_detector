@@ -1,6 +1,6 @@
 # hate_detector
 
-An implementation of a neural network topology for detecting hate speech
+An implementation of a neural network topology for detecting hate speech. Not currently ready for prime time but neural net works as designed.
 
 This project uses a classic NLP techniques and a neural network to classify a tweet as either: 0 - hate speech 1 - offensive language 2 - neither.
 
@@ -20,12 +20,7 @@ pages = {512-515}
 A csv file containing the tweets, labeled as above, is preprocessed by removing punctuation, numbers, and the English stopwords from the NLTK, along with "rt", "ff", and "amp".
 After making the tweets lowcased they were then stemmed with the English Snowball Stemmer, and tokenized with the Keras tokenizer.
 Words that appeared less than 5 times were disregarded.
-The tweets where then fed to gensim and turned into vectors by a model trained on the Google News corpus. 
-
-
-An implementation of a neural network topology for detecting offensive speech or  hate speech in tweets.
-
-Not currently ready for prime time but neural net works as designed.
+The above will be altered in the next version. Rather than tokenizing tweets, they will be fed to a gensim keyedvectors model trained on the google news corpus.
 
 Words from tweets need to be embedded into 300 dimension vectors using the google news corpus with gensim. Work is ongoing.
 
