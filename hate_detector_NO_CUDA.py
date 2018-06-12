@@ -1,6 +1,3 @@
-
-
-
 import os
 import collections
 import pandas as pd
@@ -17,7 +14,7 @@ from keras.preprocessing.text import text_to_word_sequence
 from keras.preprocessing.sequence import pad_sequences
 from keras.utils import to_categorical
 from keras.models import Sequential, Model
-from keras.layers import Embedding, Dropout, Conv1D, MaxPooling1D, CuDNNGRU, GlobalMaxPooling1D, Dense
+from keras.layers import Embedding, Dropout, Conv1D, MaxPooling1D, GRU, GlobalMaxPooling1D, Dense
 from keras import regularizers
 from keras import metrics
 import h5py
@@ -94,7 +91,7 @@ y_hold = y_val_to_divide[-nb_validation_samples_2:]
 
 labels = to_categorical(np.asarray(y))
 
-word2vec = gensim.models.KeyedVectors.load_word2vec_format(WORD2VEC_MODEL,
+word2vec = gensim.models.KeyedVectors.load_word2vec_format(WORD2VEC_MODEL, 
                                                            binary=True)
 
 embedding_weights = np.zeros((vocab_size, EMBEDDING_DIM))
@@ -118,7 +115,7 @@ model.add(Conv1D(filters=100, kernel_size=4, padding='same', activation='relu'))
 
 model.add(MaxPooling1D(pool_size=4))
 
-model.add(CuDNNGRU(100, return_sequences=True))
+model.add(GRU(100, return_sequences=True))
 
 model.add(GlobalMaxPooling1D(input_shape=(25, 100)))
 
@@ -136,3 +133,4 @@ history = model.fit(X_train, y_train,
 model.save_weights('./hate_detector_trained.h5')
 
 model.evaluate(x=X_hold, y=y_hold, batch_size=300, verbose=0)
+
