@@ -110,7 +110,7 @@ BATCH = 300
 
 model = Sequential()
 
-model.add(Embedding(VOCAB_SIZE + 1, EMBEDDING_DIM, input_length=MAX_SEQUENCE_LENGTH, trainable=False))
+model.add(Embedding(vocab_size, EMBEDDING_DIM, input_length=MAX_SEQUENCE_LENGTH, weights=[embedding_weights]))
 
 model.add(Dropout(0.2))
 
