@@ -75,9 +75,6 @@ y_train = labels[:-nb_validation_samples_1]
 X_val_to_divide = data[-nb_validation_samples_1:]
 y_val_to_divide = labels[-nb_validation_samples_1:]
 
-X_val_to_divide.shape
-y_val_to_divide.shape
-
 second_indices = np.arange(X_val_to_divide.shape[0])
 np.random.shuffle(second_indices)
 X_val_to_divide = X_val_to_divide[second_indices]
@@ -107,7 +104,7 @@ BATCH = 300
 
 model = Sequential()
 
-model.add(Embedding(VOCAB_SIZE + 1, EMBEDDING_DIM, input_length=MAX_SEQUENCE_LENGTH, trainable=False))
+model.add(Embedding(vocab_size, EMBEDDING_DIM, input_length=MAX_SEQUENCE_LENGTH, weights=[embedding_weights]))
 
 model.add(Dropout(0.2))
 
